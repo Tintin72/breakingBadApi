@@ -121,6 +121,12 @@ input[type="text"] {
   padding-bottom: 10px;
 }
 
+.dropdown {
+  width: 50px;
+  margin: auto;
+  padding: 10px;
+}
+
 @media (max-width: 800px) {
   .cards {
     grid-template-columns: repeat(2, 1fr);

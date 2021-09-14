@@ -4,6 +4,7 @@ import Header from "./components/UI/Header";
 import CharacterGrid from "./components/character/CharacterGrid";
 import Search from "./components/UI/Search";
 import Pagination from "./components/Pagination";
+import PageDrop from "./components/UI/PageDrop";
 // import axios from "axios";
 import { useGetCharactersQuery } from "./features/characters/characterSlice";
 
@@ -15,7 +16,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const { data = [], isFetching } = useGetCharactersQuery(query);
 
-  console.log(data);
+  // console.log(data);
   // useEffect(() => {
   //   const fetchItems = async () => {
   //     const result = await axios(
@@ -37,19 +38,30 @@ function App() {
   const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
 
   //paginate
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  // const paginate = (pageNumber) => {
+  //   setCurrentPage(pageNumber);
+  // };
+
+  //update current page
+  const setPage = (pagenumber) => {
+    setCurrentPage(pagenumber);
   };
   return (
     <div className="container">
       <Header />
       <Search getQuery={(q) => setQuery(q)} />
+      <PageDrop
+        currentPage={currentPage}
+        totalPosts={data.length}
+        postsPerPage={postsPerPage}
+        setPage={setPage}
+      />
       <CharacterGrid isLoading={isFetching} items={currentPosts} />
-      <Pagination
+      {/* <Pagination
         postsPerPage={postsPerPage}
         totalPosts={data.length}
         paginate={paginate}
-      />
+      /> */}
     </div>
   );
 }
